@@ -144,6 +144,19 @@ export const useItems = () => {
 
   const handleSelectItem = useCallback((itemId, isSelected) => {
     const action = isSelected ? 'deselect' : 'select';
+    
+    // Оптимистичное обновление UI
+    setLocalSelectedItems(prev => {
+      const newSet = new Set(prev);
+      if (action === 'select') {
+        newSet.add(itemId);
+      } else {
+        newSet.delete(itemId);
+      }
+      return newSet;
+    });
+    
+    // Отправляем запрос на сервер
     selectMutation.mutate({ itemIds: [itemId], action });
   }, [selectMutation]);
 
@@ -152,6 +165,19 @@ export const useItems = () => {
     
     const itemIds = itemsData.items.map(item => item.id);
     const action = selectAll ? 'select' : 'deselect';
+    
+    // Оптимистичное обновление UI
+    setLocalSelectedItems(prev => {
+      const newSet = new Set(prev);
+      if (action === 'select') {
+        itemIds.forEach(id => newSet.add(id));
+      } else {
+        itemIds.forEach(id => newSet.delete(id));
+      }
+      return newSet;
+    });
+    
+    // Отправляем запрос на сервер
     selectMutation.mutate({ itemIds, action });
   }, [itemsData?.items, selectMutation]);
 

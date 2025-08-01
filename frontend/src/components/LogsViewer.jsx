@@ -20,7 +20,7 @@ const LogsViewer = () => {
         limit: '100'
       });
       
-      const response = await fetch(`http://localhost:3000/api/logs/${type}?${params}`);
+      const response = await fetch(`/api/logs/${type}?${params}`);
       const data = await response.json();
       setLogs(data.logs);
     } catch (error) {
@@ -37,7 +37,7 @@ const LogsViewer = () => {
         end: dateRange.end
       });
       
-      const response = await fetch(`http://localhost:3000/api/logs/stats?${params}`);
+      const response = await fetch(`/api/logs/stats?${params}`);
       const data = await response.json();
       setStats(data);
     } catch (error) {
