@@ -22,7 +22,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`API available at http://localhost:${PORT}/api`);
-  console.log(`Frontend available at http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

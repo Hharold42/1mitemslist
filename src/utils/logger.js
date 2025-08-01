@@ -12,7 +12,6 @@ class ActionLogger {
     }
   }
 
-  // Логирование действий пользователя
   logAction(action, details = {}) {
     const timestamp = new Date().toISOString();
     const logEntry = {
@@ -28,7 +27,6 @@ class ActionLogger {
     fs.appendFileSync(this.logFile, logLine);
   }
 
-  // Логирование производительности операций
   logPerformance(operation, duration, details = {}) {
     const timestamp = new Date().toISOString();
     const logEntry = {
@@ -43,7 +41,6 @@ class ActionLogger {
     fs.appendFileSync(this.performanceFile, logLine);
   }
 
-  // Обертка для измерения времени выполнения функции
   async measurePerformance(operation, fn, details = {}) {
     const startTime = Date.now();
     try {
@@ -62,7 +59,6 @@ class ActionLogger {
     }
   }
 
-  // Синхронная версия для измерения времени
   measurePerformanceSync(operation, fn, details = {}) {
     const startTime = Date.now();
     try {
@@ -81,7 +77,6 @@ class ActionLogger {
     }
   }
 
-  // Получение логов за определенный период
   getLogs(startDate, endDate, logType = 'actions') {
     const filePath = logType === 'performance' ? this.performanceFile : this.logFile;
     
@@ -111,7 +106,6 @@ class ActionLogger {
     return logs;
   }
 
-  // Очистка старых логов (старше 30 дней)
   cleanupOldLogs() {
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
@@ -131,7 +125,6 @@ class ActionLogger {
   }
 }
 
-// Создаем единственный экземпляр логгера
 const logger = new ActionLogger();
 
 setInterval(() => {

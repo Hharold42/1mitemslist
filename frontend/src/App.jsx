@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ItemsList from './components/ItemsList';
 
-// Создаем экземпляр QueryClient
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

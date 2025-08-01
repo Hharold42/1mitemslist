@@ -96,7 +96,6 @@ const getItems = async (req, res) => {
       };
     }, { page, limit, search, ...requestInfo });
 
-    // Логируем действие
     logger.logAction('getItems', { 
       page, 
       limit, 
@@ -151,7 +150,6 @@ const reorderItems = async (req, res) => {
       };
     }, { movedId, targetId, search, ...requestInfo });
 
-    // Логируем действие
     logger.logAction('reorderItems', { 
       movedId, 
       targetId, 
@@ -200,7 +198,6 @@ const selectItems = async (req, res) => {
       };
     }, { itemIds, action, ...requestInfo });
 
-    // Логируем действие
     logger.logAction('selectItems', { 
       itemIds, 
       action, 
@@ -235,7 +232,6 @@ const getState = async (req, res) => {
       };
     }, { ...requestInfo });
 
-    // Логируем действие
     logger.logAction('getState', { 
       selectedCount: result.selectedItems.length,
       totalItems: result.totalItems,

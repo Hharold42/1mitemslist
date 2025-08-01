@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const API_BASE_URL = '/api/items';
 
-// Создаем экземпляр axios с базовой конфигурацией
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {

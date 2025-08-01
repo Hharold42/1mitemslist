@@ -141,7 +141,6 @@ export const useItems = () => {
   const handleSelectItem = useCallback((itemId, isSelected) => {
     const action = isSelected ? 'deselect' : 'select';
     
-    // Оптимистичное обновление UI
     setLocalSelectedItems(prev => {
       const newSet = new Set(prev);
       if (action === 'select') {
@@ -162,7 +161,6 @@ export const useItems = () => {
     const itemIds = itemsData.items.map(item => item.id);
     const action = selectAll ? 'select' : 'deselect';
     
-    // Оптимистичное обновление UI
     setLocalSelectedItems(prev => {
       const newSet = new Set(prev);
       if (action === 'select') {

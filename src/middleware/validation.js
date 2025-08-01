@@ -1,4 +1,4 @@
-// Валидация параметров пагинации
+
 const validatePagination = (req, res, next) => {
   const page = parseInt(req.query.page);
   const limit = parseInt(req.query.limit);
@@ -14,10 +14,7 @@ const validatePagination = (req, res, next) => {
   next();
 };
 
-// Валидация тела запроса для reorder
 const validateReorder = (req, res, next) => {
-  console.log(req.body);
-
   const { movedId, targetId } = req.body;
 
   if (!movedId || !targetId) {
@@ -38,7 +35,6 @@ const validateReorder = (req, res, next) => {
   next();
 };
 
-// Валидация тела запроса для select
 const validateSelect = (req, res, next) => {
   const { itemIds, action } = req.body;
 
