@@ -2,15 +2,13 @@ import { useCallback, useState } from 'react';
 import SearchBar from './SearchBar';
 import ControlPanel from './ControlPanel';
 import DraggableList from './DraggableList';
-import VirtualList from './VirtualList';
 import LogsViewer from './LogsViewer';
 import { useItems } from '../hooks/useItems';
 import { Settings, BarChart3 } from 'lucide-react';
 
 const ItemsList = () => {
-  const [useVirtualList, setUseVirtualList] = useState(false);
   const [showLogs, setShowLogs] = useState(false);
-  
+
   const {
     items,
     total,
@@ -108,49 +106,9 @@ const ItemsList = () => {
           onRefresh={refetch}
           isLoading={isLoading}
         />
-{/* 
-        <div className="mt-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Settings className="h-4 w-4 text-gray-500" />
-            <span className="text-sm text-gray-600">Режим отображения:</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setUseVirtualList(false)}
-              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-                !useVirtualList
-                  ? 'bg-blue-100 text-blue-700'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              Drag&Drop
-            </button>
-            <button
-              onClick={() => setUseVirtualList(true)}
-              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-                useVirtualList
-                  ? 'bg-blue-100 text-blue-700'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              Виртуальный список
-            </button>
-          </div>
-        </div> */}
 
         <div className="mt-4">
-          {useVirtualList ? (
-            <VirtualList
-              items={items}
-              selectedItems={selectedItems}
-              onSelect={handleItemSelect}
-              onLoadMore={handleLoadMore}
-              hasMore={hasMore}
-              isLoading={isLoading}
-              itemCount={hasMore ? items.length + 20 : items.length}
-            />
-          ) : (
-            <DraggableList
+          <DraggableList
               items={items}
               selectedItems={selectedItems}
               onSelect={handleItemSelect}
@@ -160,7 +118,6 @@ const ItemsList = () => {
               isLoading={isLoading}
               total={total}
             />
-          )}
         </div>
 
         {searchQuery && (

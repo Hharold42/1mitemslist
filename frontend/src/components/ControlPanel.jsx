@@ -17,16 +17,13 @@ const ControlPanel = ({
 
   return (
     <div className="flex items-center justify-between p-4 bg-gray-50 border-b border-gray-200">
-      {/* Левая часть - статистика и кнопки выбора */}
       <div className="flex items-center gap-4">
-        {/* Статистика */}
         <div className="text-sm text-gray-600">
           Выбрано: <span className="font-medium text-blue-600">{selectedCount}</span> из{' '}
           <span className="font-medium">{total.toLocaleString()}</span>
         </div>
 
-        {/* Кнопки выбора */}
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <button
             onClick={onSelectAll}
             disabled={allSelected || isLoading}
@@ -56,10 +53,9 @@ const ControlPanel = ({
             <Square className="h-4 w-4" />
             Снять выбор
           </button>
-        </div>
+        </div> */}
       </div>
 
-      {/* Правая часть - кнопка обновления */}
       <div className="flex items-center gap-2">
         <button
           onClick={onRefresh}

@@ -10,7 +10,7 @@ export const useItems = () => {
   const [localSelectedItems, setLocalSelectedItems] = useState(new Set());
   const [lastKnownState, setLastKnownState] = useState(null);
   const queryClient = useQueryClient();
-  
+
   const {
     history,
     isProcessing,
@@ -105,11 +105,9 @@ export const useItems = () => {
     }
 
     const { movedId, targetId } = dragInfo;
-    
-    // Сохраняем текущее состояние перед изменением
+
     setLastKnownState([...allItems]);
-    
-    // Добавляем действие в историю
+
     const actionId = addAction({
       type: 'reorder',
       movedId,
@@ -117,11 +115,10 @@ export const useItems = () => {
       searchQuery
     });
 
-    // Применяем оптимистичное обновление
     const newItems = [...allItems];
     const movedIndex = newItems.findIndex(item => item.id === movedId);
     const targetIndex = newItems.findIndex(item => item.id === targetId);
-    
+
     if (movedIndex !== -1 && targetIndex !== -1) {
       const [movedItem] = newItems.splice(movedIndex, 1);
       const insertIndex = targetIndex > movedIndex ? targetIndex : targetIndex;
@@ -129,8 +126,7 @@ export const useItems = () => {
       setAllItems(newItems);
     }
 
-    // Отправляем запрос на сервер
-    reorderMutation.mutate({ 
+    reorderMutation.mutate({
       movedId,
       targetId,
       searchQuery,
@@ -162,7 +158,7 @@ export const useItems = () => {
 
   const handleSelectAll = useCallback((selectAll) => {
     if (!itemsData?.items) return;
-    
+
     const itemIds = itemsData.items.map(item => item.id);
     const action = selectAll ? 'select' : 'deselect';
     
