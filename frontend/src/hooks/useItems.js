@@ -67,20 +67,7 @@ export const useItems = () => {
 
   const reorderMutation = useMutation({
     mutationFn: reorderItems,
-    onSuccess: (data, variables) => {
-      console.log('Reorder success:', data);
-      updateActionStatus(variables.actionId, 'success');
-      queryClient.invalidateQueries(['state']);
-      queryClient.invalidateQueries(['items']);
-      refetch();
-    },
-    onError: (error, variables) => {
-      console.error('Reorder error:', error);
-      updateActionStatus(variables.actionId, 'error', error.message);
-      // Откатываем к последнему известному состоянию
-      if (lastKnownState) {
-        setAllItems(lastKnownState);
-      }
+    onSuccess: () => {
       queryClient.invalidateQueries(['items']);
     },
   });
@@ -88,9 +75,7 @@ export const useItems = () => {
   const handleSearch = useCallback((query) => {
     setSearchQuery(query);
     setPage(1);
-    setAllItems([]);
-    queryClient.removeQueries(['items']);
-  }, [queryClient]);
+  }, []);
 
   const loadMore = useCallback(() => {
     if (itemsData?.hasMore) {
@@ -151,7 +136,6 @@ export const useItems = () => {
       return newSet;
     });
     
-    // Отправляем запрос на сервер
     selectMutation.mutate({ itemIds: [itemId], action });
   }, [selectMutation]);
 
@@ -171,7 +155,6 @@ export const useItems = () => {
       return newSet;
     });
     
-    // Отправляем запрос на сервер
     selectMutation.mutate({ itemIds, action });
   }, [itemsData?.items, selectMutation]);
 
@@ -193,7 +176,6 @@ export const useItems = () => {
     refetch,
     reorderMutation,
     selectMutation,
-    // История действий
     history,
     isProcessing,
     clearHistory

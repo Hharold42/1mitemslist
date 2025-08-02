@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import SearchBar from './SearchBar';
 import ControlPanel from './ControlPanel';
 import DraggableList from './DraggableList';
@@ -8,6 +8,12 @@ import { Settings, BarChart3 } from 'lucide-react';
 
 const ItemsList = () => {
   const [showLogs, setShowLogs] = useState(false);
+  const [showLogsButton, setShowLogsButton] = useState(false);
+
+  useEffect(() => {
+    window.showLogsButton = () => setShowLogsButton(true);
+    window.hideLogsButton = () => setShowLogsButton(false);
+  }, []);
 
   const {
     items,
@@ -82,13 +88,15 @@ const ItemsList = () => {
               Управление списком из 1 000 000 элементов с поиском, сортировкой и выбором
             </p>
           </div>
-          <button
-            onClick={() => setShowLogs(!showLogs)}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-          >
-            <BarChart3 className="h-4 w-4" />
-            {showLogs ? 'Скрыть логи' : 'Показать логи'}
-          </button>
+          {showLogsButton && (
+            <button
+              onClick={() => setShowLogs(!showLogs)}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            >
+              <BarChart3 className="h-4 w-4" />
+              {showLogs ? 'Скрыть логи' : 'Показать логи'}
+            </button>
+          )}
         </div>
 
         <div className="mb-6">

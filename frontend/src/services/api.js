@@ -9,14 +9,6 @@ const api = axios.create({
   },
 });
 
-/**
- * Получение элементов с пагинацией и поиском
- * @param {Object} params - Параметры запроса
- * @param {number} params.page - Номер страницы
- * @param {number} params.limit - Количество элементов
- * @param {string} params.search - Поисковый запрос
- * @returns {Promise<ItemsResponse>}
- */
 export const getItems = async ({ page = 1, limit = 20, search = '' } = {}) => {
   const params = new URLSearchParams();
   if (page) params.append('page', page);
@@ -27,31 +19,17 @@ export const getItems = async ({ page = 1, limit = 20, search = '' } = {}) => {
   return response.data;
 };
 
-/**
- * Изменение порядка элементов
- * @param {ReorderRequest} data - Данные для изменения порядка
- * @returns {Promise<Object>}
- */
 export const reorderItems = async (data) => {
   console.log(data);
   const response = await api.post('/reorder', data);
   return response.data;
 };
 
-/**
- * Выбор/отмена выбора элементов
- * @param {SelectRequest} data - Данные для выбора
- * @returns {Promise<Object>}
- */
 export const selectItems = async (data) => {
   const response = await api.post('/select', data);
   return response.data;
 };
 
-/**
- * Получение текущего состояния
- * @returns {Promise<StateResponse>}
- */
 export const getState = async () => {
   const response = await api.get('/state');
   return response.data;
